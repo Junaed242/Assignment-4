@@ -11,10 +11,80 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Job Application Tracker</title>
   </head>
 
-  <body>
-    
+  <body class="min-h-screen p-4 md:p-8">
+    <header class="max-w-6xl mx-auto mb-10">
+      <h1 class="text-3xl font-bold mb-6">
+        Job Application Tracker
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">Total</div>
+            <div id="all-count" class="stat-value text-primary">8</div>
+          </div>
+        </div>
+        <div class="stats shadow bg-white border-t-4 border-emerald-500">
+          <div class="stat">
+            <div class="stat-title">Interview</div>
+            <div id="interview-count" class="stat-value text-emerald-500">
+              0
+            </div>
+          </div>
+        </div>
+        <div class="stats shadow bg-white border-t-4 border-red-500">
+          <div class="stat">
+            <div class="stat-title">Rejected</div>
+            <div id="rejected-count" class="stat-value text-rose-500">0</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-4 md:px-0">
+      <hr class="border-t border-slate-200 my-8" />
+    </div>
+
+    <section class="max-w-6xl mx-auto mb-8 px-2">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-bold">Available Jobs</h2>
+        <p class="text-slate-400 text-sm font-medium">
+          <span id="job-total-text">8</span> jobs
+        </p>
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          id="tab-all"
+          class="btn btn-primary btn-sm px-6 rounded-md capitalize font-semibold"
+        >
+          All
+        </button>
+        <button
+          id="tab-interview"
+          class="btn bg-white border btn-sm px-6 rounded-md capitalize text-slate-500 font-semibold"
+        >
+          Interview
+        </button>
+        <button
+          id="tab-rejected"
+          class="btn bg-white border btn-sm px-6 rounded-md capitalize text-slate-500 font-semibold"
+        >
+          Rejected
+        </button>
+      </div>
+    </section>
+
+
   </body>
 </html>
