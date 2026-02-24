@@ -18,9 +18,7 @@ const rejectedFilterBtn = document.getElementById('tab-rejected');
 const allCardSection = document.getElementById('allCards');
 const mainContainer = document.getElementById('job-container');
 
-/**
- * Updates all dashboard numbers and the total jobs text
- */
+// Updates Dashboard number
 function calculateCount() {
     
     const totalPhysicalCards = allCardSection.querySelectorAll('.card').length;
@@ -87,8 +85,53 @@ function checkEmptyState() {
     }
 }
 
+mainContainer.addEventListener('click', function (event) {
+    const target = event.target;
+    const card = target.closest('.card');
+    if (!card) return;
+
+    // Identify the job by the Company Name
+    const companyName = card.querySelector('h3').innerText;
+    const badge = card.querySelector('.bg-blue-50, .bg-emerald-50, .bg-rose-50');
+
+    // INTERVIEW BUTTON
+    if (target.innerText.trim().toUpperCase() === 'INTERVIEW') {
+        badge.innerText = 'INTERVIEW';
+        badge.className = "bg-emerald-50 text-emerald-600 text-[11px] font-bold px-3 py-1 rounded uppercase tracking-wide";
+        
+        if (!interviewList.includes(companyName)) interviewList.push(companyName);
+        rejectedList = rejectedList.filter(item => item !== companyName);
+        
+        calculateCount();
+        toggleStyle(currentStatus);
+    } 
+
+    // REJECTED BUTTON
+    else if (target.innerText.trim().toUpperCase() === 'REJECTED') {
+        badge.innerText = 'REJECTED';
+        badge.className = "bg-rose-50 text-rose-600 text-[11px] font-bold px-3 py-1 rounded uppercase tracking-wide";
+        
+        if (!rejectedList.includes(companyName)) rejectedList.push(companyName);
+        interviewList = interviewList.filter(item => item !== companyName);
+        
+        calculateCount();
+        toggleStyle(currentStatus);
+    }
+
+    // DELETE BUTTON
+    else if (target.closest('.fa-trash')) {
+        interviewList = interviewList.filter(item => item !== companyName);
+        rejectedList = rejectedList.filter(item => item !== companyName);
+        card.remove();
+        
+        calculateCount();
+        toggleStyle(currentStatus);
+    }
+});
+
 // Nav Listener
 allFilterBtn.addEventListener('click', () => toggleStyle('tab-all'));
 interviewFilterBtn.addEventListener('click', () => toggleStyle('tab-interview'));
 rejectedFilterBtn.addEventListener('click', () => toggleStyle('tab-rejected'));
 
+calculateCount();
